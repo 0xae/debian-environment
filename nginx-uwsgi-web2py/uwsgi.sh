@@ -17,8 +17,6 @@ NAME=uwsgi
 DESC=uwsgi
 UWSGI_LOG_FILE=/home/ayrton/www/logs/uwsgi.log
 WEB2PY_LOCATION=/home/ayrton/www/web2py
-SPOOLER_FILE=/home/ayrton/www/web2py/applications/emprego/modules/spooler.py
-SPOOLER_LOCATION=/home/ayrton/www/web2py/applications/emprego/spooler
 
 test -x $DAEMON || exit 0
 # Include uwsgi defaults if available
@@ -28,9 +26,7 @@ if [ -f /etc/default/uwsgi ] ; then
 fi
 set -e
 
-#CONFS: http://uwsgi-docs.readthedocs.org/en/latest/Options.html
-DAEMON_OPTS="--socket /tmp/uwsgi.sock --thunder-lock -M -t 30 -A 2 -p 4 -b 65535 -d $UWSGI_LOG_FILE --pythonpath $WEB2PY_LOCATION --module wsgihandler --http-timeout 600 --harakiri 600 --harakiri-verbose --spooler $SPOOLER_LOCATION --import $SPOOLER_FILE"
-#DAEMON_OPTS="--socket /tmp/uwsgi.sock --chmod-socket=666 --thunder-lock -M -t 30 -A 2 -p 4 -b 65535 -d $UWSGI_LOG_FILE --pythonpath $WEB2PY_LOCATION --module wsgihandler --http-timeout 600 --harakiri 600 --harakiri-verbose "
+DAEMON_OPTS="--socket /tmp/uwsgi.sock --thunder-lock -M -t 30 -A 2 -p 4 -b 65535 -d $UWSGI_LOG_FILE --pythonpath $WEB2PY_LOCATION --module wsgihandler --http-timeout 600 --harakiri 600 --harakiri-verbose"
 
 case "$1" in
         start)
